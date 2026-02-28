@@ -17,10 +17,30 @@ export default defineConfig({
         display: "standalone",
         start_url: "/",
         icons: [
-          { src: "/icons/manifest-icon-192.maskable.png", sizes: "192x192", type: "image/png", purpose: "any" },
-          { src: "/icons/manifest-icon-192.maskable.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
-          { src: "/icons/manifest-icon-512.maskable.png", sizes: "512x512", type: "image/png", purpose: "any" },
-          { src: "/icons/manifest-icon-512.maskable.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+          {
+            src: "/icons/manifest-icon-192.maskable.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/icons/manifest-icon-192.maskable.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "maskable",
+          },
+          {
+            src: "/icons/manifest-icon-512.maskable.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/icons/manifest-icon-512.maskable.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable",
+          },
         ],
       },
       workbox: {
@@ -36,7 +56,7 @@ export default defineConfig({
   ],
   server: {
     host: true,
-    port: 5175,
+    port: 5173,
     proxy: {
       "/api": {
         target: "http://localhost:3000",
