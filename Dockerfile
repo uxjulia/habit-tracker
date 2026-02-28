@@ -25,10 +25,13 @@ FROM node:20-alpine AS production
 WORKDIR /app
 ENV NODE_ENV=production
 
+# Copy root node_modules (npm workspaces hoists deps here)
+COPY --from=server-build /app/node_modules ./node_modules
+COPY --from=server-build /app/package.json ./package.json
+
 # Copy server build
 COPY --from=server-build /app/server/dist ./server/dist
 COPY --from=server-build /app/server/prisma ./server/prisma
-COPY --from=server-build /app/server/node_modules ./server/node_modules
 COPY server/package.json ./server/
 
 # Copy client build (served as static files by Express)
