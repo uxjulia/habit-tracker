@@ -32,7 +32,9 @@ On first visit, you'll be taken to `/setup` to create your account.
 # 1. Create a .env file with a secure JWT_SECRET
 echo "JWT_SECRET=$(openssl rand -hex 32)" > .env
 
-# 2. Start
+# 2. Review and update the docker-compose.yml file if needed
+
+#3 Build and start up the app
 docker compose up --build -d
 
 # 3. Open http://localhost:3000
@@ -41,14 +43,8 @@ docker compose up --build -d
 
 The SQLite database is persisted in a Docker volume (`habit-data`).
 
-**Optional TLS via nginx:**
-```bash
-# Place Let's Encrypt certs in ./certs/ (fullchain.pem, privkey.pem)
-# Edit nginx.conf to set your domain
-docker compose --profile with-nginx up -d
-```
-
 **Skip the web setup wizard (set credentials via env):**
+
 ```yaml
 # In docker-compose.yml environment section:
 SETUP_USERNAME: admin
@@ -77,11 +73,11 @@ SETUP_PASSWORD: your-secure-password
 
 ## Environment Variables
 
-| Variable | Required | Default | Description |
-|---|---|---|---|
-| `JWT_SECRET` | Yes | — | Secret for signing JWTs. Use a long random string. |
-| `JWT_EXPIRES_IN` | No | `30d` | Token expiry |
-| `DATABASE_URL` | Yes | — | SQLite path, e.g. `file:/data/habits.db` |
-| `PORT` | No | `3000` | Server port |
-| `SETUP_USERNAME` | No | — | Skip web wizard: auto-create user with this username |
-| `SETUP_PASSWORD` | No | — | Skip web wizard: auto-create user with this password |
+| Variable         | Required | Default | Description                                          |
+| ---------------- | -------- | ------- | ---------------------------------------------------- |
+| `JWT_SECRET`     | Yes      | —       | Secret for signing JWTs. Use a long random string.   |
+| `JWT_EXPIRES_IN` | No       | `30d`   | Token expiry                                         |
+| `DATABASE_URL`   | Yes      | —       | SQLite path, e.g. `file:/data/habits.db`             |
+| `PORT`           | No       | `3000`  | Server port                                          |
+| `SETUP_USERNAME` | No       | —       | Skip web wizard: auto-create user with this username |
+| `SETUP_PASSWORD` | No       | —       | Skip web wizard: auto-create user with this password |
