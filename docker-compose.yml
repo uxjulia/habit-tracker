@@ -13,8 +13,8 @@ services:
     networks:
       - frontend
     # If not using a reverse proxy, uncomment the following and remove the networks section above:
-    # ports:
-    #   - "3000:3000"
+    ports:
+      - "3000:3000"
     volumes:
       - habit-data:/data
     environment:
@@ -26,7 +26,11 @@ services:
       # SETUP_USERNAME: ${SETUP_USERNAME}
       # SETUP_PASSWORD: ${SETUP_PASSWORD}
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          "wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1",
+        ]
       interval: 30s
       timeout: 5s
       retries: 3
