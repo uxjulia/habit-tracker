@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Button } from '../ui/Button';
 import { LogEntryModal } from './LogEntryModal';
 import { useDeleteEntry } from '../../hooks/useEntries';
 import { formatDisplayDate, fromISODate } from '../../utils/dates';
@@ -27,9 +26,7 @@ export function DayDetailDrawer({ open, onClose, date, entries, habits }: DayDet
     }
   };
 
-  const unloggedHabits = habits.filter(
-    (h) => !h.archived && !entries.some((e) => e.habitId === h.id)
-  );
+  const activeHabits = habits.filter((h) => !h.archived);
 
   return createPortal(
     <>
@@ -100,10 +97,10 @@ export function DayDetailDrawer({ open, onClose, date, entries, habits }: DayDet
           )}
 
           {/* Add more */}
-          {unloggedHabits.length > 0 && (
+          {activeHabits.length > 0 && (
             <div className="flex flex-col gap-2">
               <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400">Add</p>
-              {unloggedHabits.map((habit) => (
+              {activeHabits.map((habit) => (
                 <button
                   key={habit.id}
                   onClick={() => setAddingHabit(habit)}
@@ -121,7 +118,7 @@ export function DayDetailDrawer({ open, onClose, date, entries, habits }: DayDet
             </div>
           )}
 
-          {entries.length === 0 && unloggedHabits.length === 0 && (
+          {entries.length === 0 && activeHabits.length === 0 && (
             <p className="text-sm text-zinc-400 text-center py-4">No habits to show</p>
           )}
         </div>
