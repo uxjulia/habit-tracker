@@ -6,7 +6,7 @@ networks:
     external: true
 
 services:
-  app:
+  habit-tracker:
     build: .
     container_name: habit-tracker
     restart: unless-stopped
@@ -26,13 +26,14 @@ services:
       # SETUP_USERNAME: ${SETUP_USERNAME}
       # SETUP_PASSWORD: ${SETUP_PASSWORD}
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 3
 
 volumes:
   habit-data:
-    driver: local
+    name: habit-tracker_habit-data
+    external: true
 
 # NPM is managed separately. See the README for proxy host configuration.
