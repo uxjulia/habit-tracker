@@ -10,11 +10,12 @@ services:
     build: .
     container_name: habit-tracker
     restart: unless-stopped
+    init: true
     networks:
       - frontend
     # If not using a reverse proxy, uncomment the following and remove the networks section above:
-    ports:
-      - "3000:3000"
+    #ports:
+    #  - "3000:3000"
     volumes:
       - habit-data:/data
     environment:
