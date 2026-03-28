@@ -1,20 +1,31 @@
 import { useState } from 'react';
+import { addDays, subDays } from 'date-fns';
 import { Button } from '../components/ui/Button';
 import { LogEntryModal } from '../components/entries/LogEntryModal';
 import { useHabits } from '../hooks/useHabits';
-import { useTodayEntries, useDeleteEntry } from '../hooks/useEntries';
+import { useEntries, useDeleteEntry } from '../hooks/useEntries';
+import { format } from 'date-fns';
 import { toISODate, formatDisplayDate } from '../utils/dates';
 import type { Habit, HabitEntry } from '../types';
 
 export function TodayPage() {
-  const today = toISODate(new Date());
+  const todayStr = toISODate(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const dateStr = toISODate(currentDate);
+  const isCurrentDay = dateStr === todayStr;
+
   const { data: habits = [] } = useHabits();
-  const { data: entries = [] } = useTodayEntries();
+  const { data: entries = [] } = useEntries(dateStr, dateStr);
   const deleteEntry = useDeleteEntry();
 
   const [logTarget, setLogTarget] = useState<{ habit: Habit; date: string } | null>(null);
   const [editTarget, setEditTarget] = useState<HabitEntry | null>(null);
   const [showPicker, setShowPicker] = useState(false);
+
+  const goToPreviousDay = () => setCurrentDate((d) => subDays(d, 1));
+  const goToNextDay = () => {
+    if (!isCurrentDay) setCurrentDate((d) => addDays(d, 1));
+  };
 
   const handleDelete = async (entry: HabitEntry) => {
     if (window.confirm(`Remove this ${entry.habit.name} entry?`)) {
@@ -33,10 +44,41 @@ export function TodayPage() {
     <div>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Today</h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">{formatDisplayDate(new Date())}</p>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={goToPreviousDay}
+            className="flex items-center justify-center w-8 h-8 rounded-lg text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            aria-label="Previous day"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <div>
+            <h1 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+              {isCurrentDay ? 'Today' : format(currentDate, 'EEEE')}
+            </h1>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">{formatDisplayDate(currentDate)}</p>
+          </div>
+          <button
+            onClick={goToNextDay}
+            disabled={isCurrentDay}
+            className="flex items-center justify-center w-8 h-8 rounded-lg text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-zinc-400"
+            aria-label="Next day"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
+        {!isCurrentDay && (
+          <button
+            onClick={() => setCurrentDate(new Date())}
+            className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700 rounded-lg px-2.5 py-1 transition-colors"
+          >
+            Today
+          </button>
+        )}
       </div>
 
       {/* Habits list */}
@@ -72,7 +114,7 @@ export function TodayPage() {
                   <Button
                     variant={isLogged ? 'secondary' : 'primary'}
                     size="sm"
-                    onClick={() => setLogTarget({ habit, date: today })}
+                    onClick={() => setLogTarget({ habit, date: dateStr })}
                   >
                     {isLogged ? '+ Log Again' : 'Log'}
                   </Button>
@@ -148,7 +190,7 @@ export function TodayPage() {
                   key={habit.id}
                   onClick={() => {
                     setShowPicker(false);
-                    setLogTarget({ habit, date: today });
+                    setLogTarget({ habit, date: dateStr });
                   }}
                   className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-left transition-colors"
                 >
