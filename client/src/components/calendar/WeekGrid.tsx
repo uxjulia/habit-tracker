@@ -1,11 +1,6 @@
 import { useMemo, useState } from "react";
 import { cn } from "../../utils/cn";
-import {
-  toISODate,
-  formatDayOfWeek,
-  formatDayNumber,
-  isToday,
-} from "../../utils/dates";
+import { toISODate, formatDayOfWeek, formatDayNumber, isToday, formatTime } from "../../utils/dates";
 import { LogEntryModal } from "../entries/LogEntryModal";
 import type { Habit, HabitEntry } from "../../types";
 
@@ -34,11 +29,7 @@ export function WeekGrid({ days, habits, entries, onDayClick }: WeekGridProps) {
   }, [entries]);
 
   if (habits.length === 0) {
-    return (
-      <div className="text-center py-12 text-zinc-400">
-        No habits yet. Create one to get started.
-      </div>
-    );
+    return <div className="text-center py-12 text-zinc-400">No habits yet. Create one to get started.</div>;
   }
 
   return (
@@ -46,24 +37,19 @@ export function WeekGrid({ days, habits, entries, onDayClick }: WeekGridProps) {
       <div className="overflow-x-auto -mx-4 px-4 md:overflow-x-visible md:mx-0 md:px-0">
         <div className="min-w-[480px]">
           {/* Header row */}
-          <div
-            className="grid items-center mb-1"
-            style={{ gridTemplateColumns: "120px repeat(7, 1fr)" }}
-          >
+          <div className="grid items-center mb-1" style={{ gridTemplateColumns: "120px repeat(7, 1fr)" }}>
             <div /> {/* Empty corner */}
             {days.map((day) => {
               const today = isToday(day);
               return (
                 <div key={toISODate(day)} className="text-center">
-                  <p className="text-xs text-zinc-400">
-                    {formatDayOfWeek(day)}
-                  </p>
+                  <p className="text-xs text-zinc-400">{formatDayOfWeek(day)}</p>
                   <p
                     className={cn(
                       "text-sm font-medium mx-auto w-7 h-7 flex items-center justify-center rounded-full",
                       today
                         ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900"
-                        : "text-zinc-700 dark:text-zinc-300",
+                        : "text-zinc-700 dark:text-zinc-300"
                     )}
                   >
                     {formatDayNumber(day)}
@@ -82,10 +68,7 @@ export function WeekGrid({ days, habits, entries, onDayClick }: WeekGridProps) {
             >
               {/* Habit label */}
               <div className="flex items-center gap-2 pr-3 overflow-hidden">
-                <span
-                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: habit.color }}
-                />
+                <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: habit.color }} />
                 <span className="text-sm text-zinc-700 dark:text-zinc-300 truncate">
                   {habit.emoji} {habit.name}
                 </span>
@@ -102,15 +85,11 @@ export function WeekGrid({ days, habits, entries, onDayClick }: WeekGridProps) {
                   <button
                     key={dateStr}
                     onClick={() =>
-                      hasEntries
-                        ? onDayClick(dateStr, dayEntries)
-                        : setLogTarget({ habit, date: dateStr })
+                      hasEntries ? onDayClick(dateStr, dayEntries) : setLogTarget({ habit, date: dateStr })
                     }
                     className={cn(
                       "flex flex-col items-center justify-center gap-0.5 h-10 rounded-lg transition-colors",
-                      hasEntries
-                        ? "hover:opacity-80"
-                        : "hover:bg-zinc-100 dark:hover:bg-zinc-800",
+                      hasEntries ? "hover:opacity-80" : "hover:bg-zinc-100 dark:hover:bg-zinc-800"
                     )}
                   >
                     {dayEntries.map((entry) => (
@@ -118,7 +97,7 @@ export function WeekGrid({ days, habits, entries, onDayClick }: WeekGridProps) {
                         key={entry.id}
                         className="w-2.5 h-2.5 rounded-full"
                         style={{ backgroundColor: habit.color }}
-                        title={entry.time ?? undefined}
+                        title={entry.time ? formatTime(entry.time) : undefined}
                       />
                     ))}
                     {!hasEntries && (

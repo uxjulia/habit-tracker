@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { addDays, subDays } from 'date-fns';
-import { Button } from '../components/ui/Button';
-import { LogEntryModal } from '../components/entries/LogEntryModal';
-import { useHabits } from '../hooks/useHabits';
-import { useEntries, useDeleteEntry } from '../hooks/useEntries';
-import { format } from 'date-fns';
-import { toISODate, formatDisplayDate } from '../utils/dates';
-import type { Habit, HabitEntry } from '../types';
+import { useState } from "react";
+import { addDays, subDays } from "date-fns";
+import { Button } from "../components/ui/Button";
+import { LogEntryModal } from "../components/entries/LogEntryModal";
+import { useHabits } from "../hooks/useHabits";
+import { useEntries, useDeleteEntry } from "../hooks/useEntries";
+import { format } from "date-fns";
+import { toISODate, formatDisplayDate, formatTime } from "../utils/dates";
+import type { Habit, HabitEntry } from "../types";
 
 export function TodayPage() {
   const todayStr = toISODate(new Date());
@@ -56,7 +56,7 @@ export function TodayPage() {
           </button>
           <div>
             <h1 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-              {isCurrentDay ? 'Today' : format(currentDate, 'EEEE')}
+              {isCurrentDay ? "Today" : format(currentDate, "EEEE")}
             </h1>
             <p className="text-sm text-zinc-500 dark:text-zinc-400">{formatDisplayDate(currentDate)}</p>
           </div>
@@ -102,21 +102,18 @@ export function TodayPage() {
               >
                 {/* Habit row */}
                 <div className="flex items-center gap-3 px-4 py-3">
-                  <span
-                    className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: habit.color }}
-                  />
+                  <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: habit.color }} />
                   <div className="flex-1 min-w-0">
                     <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
                       {habit.emoji} {habit.name}
                     </span>
                   </div>
                   <Button
-                    variant={isLogged ? 'secondary' : 'primary'}
+                    variant={isLogged ? "secondary" : "primary"}
                     size="sm"
                     onClick={() => setLogTarget({ habit, date: dateStr })}
                   >
-                    {isLogged ? '+ Log Again' : 'Log'}
+                    {isLogged ? "+ Log Again" : "Log"}
                   </Button>
                 </div>
 
@@ -125,19 +122,25 @@ export function TodayPage() {
                   <div className="border-t border-zinc-100 dark:border-zinc-800 divide-y divide-zinc-100 dark:divide-zinc-800">
                     {habitEntries.map((entry) => (
                       <div key={entry.id} className="flex items-center gap-3 px-4 py-2.5">
-                        <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <svg
+                          className="w-4 h-4 text-green-500 flex-shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2.5}
+                        >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                         <div className="flex-1 min-w-0">
                           {entry.time && (
-                            <span className="text-xs text-zinc-500 dark:text-zinc-400 mr-2">{entry.time}</span>
+                            <span className="text-xs text-zinc-500 dark:text-zinc-400 mr-2">
+                              {formatTime(entry.time)}
+                            </span>
                           )}
                           {entry.notes && (
                             <span className="text-xs text-zinc-400 dark:text-zinc-500 truncate">{entry.notes}</span>
                           )}
-                          {!entry.time && !entry.notes && (
-                            <span className="text-xs text-zinc-400">Logged</span>
-                          )}
+                          {!entry.time && !entry.notes && <span className="text-xs text-zinc-400">Logged</span>}
                         </div>
                         <div className="flex gap-1 flex-shrink-0">
                           <button
@@ -211,11 +214,7 @@ export function TodayPage() {
         habit={logTarget?.habit}
         date={logTarget?.date}
       />
-      <LogEntryModal
-        open={!!editTarget}
-        onClose={() => setEditTarget(null)}
-        entry={editTarget ?? undefined}
-      />
+      <LogEntryModal open={!!editTarget} onClose={() => setEditTarget(null)} entry={editTarget ?? undefined} />
     </div>
   );
 }
