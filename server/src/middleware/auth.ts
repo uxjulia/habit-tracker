@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
-import { verifyToken, JwtPayload } from '../lib/jwt';
+import { Request, Response, NextFunction } from "express";
+import { verifyToken, JwtPayload } from "../lib/jwt";
 
 declare global {
   namespace Express {
@@ -11,8 +11,8 @@ declare global {
 
 export function requireAuth(req: Request, res: Response, next: NextFunction): void {
   const authHeader = req.headers.authorization;
-  if (!authHeader?.startsWith('Bearer ')) {
-    res.status(401).json({ data: null, error: { code: 'UNAUTHORIZED', message: 'No token provided' } });
+  if (!authHeader?.startsWith("Bearer ")) {
+    res.status(401).json({ data: null, error: { code: "UNAUTHORIZED", message: "No token provided" } });
     return;
   }
 
@@ -21,6 +21,6 @@ export function requireAuth(req: Request, res: Response, next: NextFunction): vo
     req.user = verifyToken(token);
     next();
   } catch {
-    res.status(401).json({ data: null, error: { code: 'UNAUTHORIZED', message: 'Invalid or expired token' } });
+    res.status(401).json({ data: null, error: { code: "UNAUTHORIZED", message: "Invalid or expired token" } });
   }
 }

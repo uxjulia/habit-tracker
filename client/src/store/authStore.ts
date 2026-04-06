@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface AuthState {
   token: string | null;
@@ -17,7 +17,7 @@ export const useAuthStore = create<AuthState>()(
       logout: () => set({ token: null, username: null }),
     }),
     {
-      name: 'habit-tracker-auth',
+      name: "habit-tracker-auth",
       partialize: (state) => ({ token: state.token, username: state.username }),
     }
   )

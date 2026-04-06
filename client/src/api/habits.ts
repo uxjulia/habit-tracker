@@ -1,15 +1,15 @@
-import { apiClient } from './client';
-import type { Habit } from '../types';
+import { apiClient } from "./client";
+import type { Habit } from "../types";
 
 export async function listHabits(includeArchived = false): Promise<Habit[]> {
-  const res = await apiClient.get<{ data: Habit[] }>('/habits', {
-    params: includeArchived ? { includeArchived: 'true' } : {},
+  const res = await apiClient.get<{ data: Habit[] }>("/habits", {
+    params: includeArchived ? { includeArchived: "true" } : {},
   });
   return res.data.data;
 }
 
 export async function createHabit(data: { name: string; color: string; emoji?: string }): Promise<Habit> {
-  const res = await apiClient.post<{ data: Habit }>('/habits', data);
+  const res = await apiClient.post<{ data: Habit }>("/habits", data);
   return res.data.data;
 }
 
@@ -26,5 +26,5 @@ export async function deleteHabit(id: string): Promise<void> {
 }
 
 export async function reorderHabits(ids: string[]): Promise<void> {
-  await apiClient.put('/habits/reorder', { ids });
+  await apiClient.put("/habits/reorder", { ids });
 }

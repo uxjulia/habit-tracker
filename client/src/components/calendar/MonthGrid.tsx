@@ -1,10 +1,10 @@
-import { useMemo } from 'react';
-import { startOfWeek, endOfWeek, eachDayOfInterval } from 'date-fns';
-import { getMonthDays, toISODate } from '../../utils/dates';
-import { DayCell } from './DayCell';
-import type { HabitEntry } from '../../types';
+import { useMemo } from "react";
+import { startOfWeek, endOfWeek, eachDayOfInterval } from "date-fns";
+import { getMonthDays, toISODate } from "../../utils/dates";
+import { DayCell } from "./DayCell";
+import type { HabitEntry } from "../../types";
 
-const DOW_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const DOW_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 interface MonthGridProps {
   month: Date;

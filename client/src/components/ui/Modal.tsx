@@ -1,6 +1,6 @@
-import { ReactNode, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import { cn } from '../../utils/cn';
+import { ReactNode, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { cn } from "../../utils/cn";
 
 interface ModalProps {
   open: boolean;
@@ -15,17 +15,21 @@ interface ModalProps {
 export function Modal({ open, onClose, title, children, className, bottomSheet = false }: ModalProps) {
   useEffect(() => {
     if (open) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
-    if (open) document.addEventListener('keydown', handler);
-    return () => document.removeEventListener('keydown', handler);
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (open) document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
   }, [open, onClose]);
 
   if (!open) return null;
@@ -33,18 +37,13 @@ export function Modal({ open, onClose, title, children, className, bottomSheet =
   return createPortal(
     <div className="fixed inset-0 z-50 flex" role="dialog" aria-modal="true">
       {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
       {/* Panel */}
       <div
         className={cn(
-          'relative z-10 bg-white dark:bg-zinc-900 shadow-2xl flex flex-col',
-          bottomSheet
-            ? 'w-full mt-auto rounded-t-2xl max-h-[90vh]'
-            : 'w-full max-w-md m-auto rounded-2xl max-h-[90vh]',
+          "relative z-10 bg-white dark:bg-zinc-900 shadow-2xl flex flex-col",
+          bottomSheet ? "w-full mt-auto rounded-t-2xl max-h-[90vh]" : "w-full max-w-md m-auto rounded-2xl max-h-[90vh]",
           className
         )}
       >

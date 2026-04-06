@@ -27,11 +27,7 @@ services:
       # SETUP_USERNAME: ${SETUP_USERNAME}
       # SETUP_PASSWORD: ${SETUP_PASSWORD}
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1",
-        ]
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 3

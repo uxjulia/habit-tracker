@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
-import { z } from 'zod';
-import * as authService from '../services/auth.service';
-import { prisma } from '../lib/prisma';
+import { Request, Response, NextFunction } from "express";
+import { z } from "zod";
+import * as authService from "../services/auth.service";
+import { prisma } from "../lib/prisma";
 
 const loginSchema = z.object({
   username: z.string().min(1),
@@ -25,11 +25,11 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     res.json({ data: result, error: null });
   } catch (err) {
     if (err instanceof z.ZodError) {
-      res.status(400).json({ data: null, error: { code: 'VALIDATION_ERROR', message: err.message } });
+      res.status(400).json({ data: null, error: { code: "VALIDATION_ERROR", message: err.message } });
       return;
     }
-    if (err instanceof Error && err.message === 'Invalid credentials') {
-      res.status(401).json({ data: null, error: { code: 'INVALID_CREDENTIALS', message: err.message } });
+    if (err instanceof Error && err.message === "Invalid credentials") {
+      res.status(401).json({ data: null, error: { code: "INVALID_CREDENTIALS", message: err.message } });
       return;
     }
     next(err);
@@ -43,11 +43,11 @@ export async function setup(req: Request, res: Response, next: NextFunction) {
     res.status(201).json({ data: result, error: null });
   } catch (err) {
     if (err instanceof z.ZodError) {
-      res.status(400).json({ data: null, error: { code: 'VALIDATION_ERROR', message: err.message } });
+      res.status(400).json({ data: null, error: { code: "VALIDATION_ERROR", message: err.message } });
       return;
     }
-    if (err instanceof Error && err.message === 'Setup already complete') {
-      res.status(403).json({ data: null, error: { code: 'SETUP_COMPLETE', message: err.message } });
+    if (err instanceof Error && err.message === "Setup already complete") {
+      res.status(403).json({ data: null, error: { code: "SETUP_COMPLETE", message: err.message } });
       return;
     }
     next(err);
@@ -74,11 +74,11 @@ export async function changePassword(req: Request, res: Response, next: NextFunc
     res.json({ data: { success: true }, error: null });
   } catch (err) {
     if (err instanceof z.ZodError) {
-      res.status(400).json({ data: null, error: { code: 'VALIDATION_ERROR', message: err.message } });
+      res.status(400).json({ data: null, error: { code: "VALIDATION_ERROR", message: err.message } });
       return;
     }
-    if (err instanceof Error && err.message === 'Current password is incorrect') {
-      res.status(400).json({ data: null, error: { code: 'WRONG_PASSWORD', message: err.message } });
+    if (err instanceof Error && err.message === "Current password is incorrect") {
+      res.status(400).json({ data: null, error: { code: "WRONG_PASSWORD", message: err.message } });
       return;
     }
     next(err);

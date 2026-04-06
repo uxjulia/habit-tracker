@@ -19,13 +19,7 @@ interface FormData {
   notes: string;
 }
 
-export function LogEntryModal({
-  open,
-  onClose,
-  habit,
-  date,
-  entry,
-}: LogEntryModalProps) {
+export function LogEntryModal({ open, onClose, habit, date, entry }: LogEntryModalProps) {
   const isEdit = !!entry;
   const createEntry = useCreateEntry();
   const updateEntry = useUpdateEntry();
@@ -76,43 +70,25 @@ export function LogEntryModal({
   const isPending = createEntry.isPending || updateEntry.isPending;
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      title={isEdit ? "Edit Entry" : `Log: ${effectiveHabit?.name}`}
-      bottomSheet
-    >
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="p-5 flex flex-col gap-4"
-      >
+    <Modal open={open} onClose={onClose} title={isEdit ? "Edit Entry" : `Log: ${effectiveHabit?.name}`} bottomSheet>
+      <form onSubmit={handleSubmit(onSubmit)} className="p-5 flex flex-col gap-4">
         {/* Habit info */}
         {effectiveHabit && (
           <div className="flex items-center gap-2">
-            <span
-              className="w-3 h-3 rounded-full flex-shrink-0"
-              style={{ backgroundColor: effectiveHabit.color }}
-            />
-            <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-              {effectiveHabit.name}
-            </span>
+            <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: effectiveHabit.color }} />
+            <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{effectiveHabit.name}</span>
             {effectiveHabit.emoji && <span>{effectiveHabit.emoji}</span>}
           </div>
         )}
 
         {/* Date display */}
         {effectiveDate && (
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            {formatDisplayDate(fromISODate(effectiveDate))}
-          </p>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">{formatDisplayDate(fromISODate(effectiveDate))}</p>
         )}
 
         {/* Time */}
         <div className="flex flex-col gap-1">
-          <label
-            htmlFor="entry-time"
-            className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
-          >
+          <label htmlFor="entry-time" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
             Time <span className="text-zinc-400 font-normal">(optional)</span>
           </label>
           <div className="flex items-center gap-2">
@@ -134,10 +110,7 @@ export function LogEntryModal({
 
         {/* Notes */}
         <div className="flex flex-col gap-1">
-          <label
-            htmlFor="entry-notes"
-            className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
-          >
+          <label htmlFor="entry-notes" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
             Notes <span className="text-zinc-400 font-normal">(optional)</span>
           </label>
           <textarea
@@ -150,12 +123,7 @@ export function LogEntryModal({
         </div>
 
         <div className="flex gap-2 pt-1">
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={onClose}
-            className="flex-1"
-          >
+          <Button type="button" variant="secondary" onClick={onClose} className="flex-1">
             Cancel
           </Button>
           <Button type="submit" className="flex-1" disabled={isPending}>

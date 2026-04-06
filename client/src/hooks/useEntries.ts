@@ -1,6 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import * as entriesApi from '../api/entries';
-import { queryKeys } from '../api/queryKeys';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import * as entriesApi from "../api/entries";
+import { queryKeys } from "../api/queryKeys";
 
 export function useTodayEntries() {
   return useQuery({

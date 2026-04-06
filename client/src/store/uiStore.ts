@@ -1,7 +1,7 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-type Theme = 'dark' | 'light';
+type Theme = "dark" | "light";
 
 interface UiState {
   theme: Theme;
@@ -12,10 +12,10 @@ interface UiState {
 export const useUiStore = create<UiState>()(
   persist(
     (set) => ({
-      theme: 'dark',
-      toggleTheme: () => set((s) => ({ theme: s.theme === 'dark' ? 'light' : 'dark' })),
+      theme: "dark",
+      toggleTheme: () => set((s) => ({ theme: s.theme === "dark" ? "light" : "dark" })),
       setTheme: (theme) => set({ theme }),
     }),
-    { name: 'habit-tracker-ui', partialize: (s) => ({ theme: s.theme }) }
+    { name: "habit-tracker-ui", partialize: (s) => ({ theme: s.theme }) }
   )
 );

@@ -1,8 +1,8 @@
-import { prisma } from '../lib/prisma';
-import { format } from 'date-fns';
+import { prisma } from "../lib/prisma";
+import { format } from "date-fns";
 
 function todayISO(): string {
-  return format(new Date(), 'yyyy-MM-dd');
+  return format(new Date(), "yyyy-MM-dd");
 }
 
 export async function getEntries(startDate: string, endDate: string, habitId?: string) {
@@ -12,7 +12,7 @@ export async function getEntries(startDate: string, endDate: string, habitId?: s
       ...(habitId ? { habitId } : {}),
     },
     include: { habit: true },
-    orderBy: [{ date: 'asc' }, { createdAt: 'asc' }],
+    orderBy: [{ date: "asc" }, { createdAt: "asc" }],
   });
 }
 
@@ -21,7 +21,7 @@ export async function getTodayEntries() {
   return prisma.habitEntry.findMany({
     where: { date: today },
     include: { habit: true },
-    orderBy: { createdAt: 'asc' },
+    orderBy: { createdAt: "asc" },
   });
 }
 

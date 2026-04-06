@@ -1,9 +1,12 @@
-import { Request, Response, NextFunction } from 'express';
-import { z } from 'zod';
-import * as entriesService from '../services/entries.service';
+import { Request, Response, NextFunction } from "express";
+import { z } from "zod";
+import * as entriesService from "../services/entries.service";
 
-const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be YYYY-MM-DD');
-const isoTime = z.string().regex(/^\d{2}:\d{2}$/, 'Time must be HH:MM').optional();
+const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be YYYY-MM-DD");
+const isoTime = z
+  .string()
+  .regex(/^\d{2}:\d{2}$/, "Time must be HH:MM")
+  .optional();
 
 const createSchema = z.object({
   habitId: z.string().min(1),
@@ -30,7 +33,7 @@ export async function list(req: Request, res: Response, next: NextFunction) {
     res.json({ data: entries, error: null });
   } catch (err) {
     if (err instanceof z.ZodError) {
-      res.status(400).json({ data: null, error: { code: 'VALIDATION_ERROR', message: err.message } });
+      res.status(400).json({ data: null, error: { code: "VALIDATION_ERROR", message: err.message } });
       return;
     }
     next(err);
@@ -53,7 +56,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     res.status(201).json({ data: entry, error: null });
   } catch (err) {
     if (err instanceof z.ZodError) {
-      res.status(400).json({ data: null, error: { code: 'VALIDATION_ERROR', message: err.message } });
+      res.status(400).json({ data: null, error: { code: "VALIDATION_ERROR", message: err.message } });
       return;
     }
     next(err);
@@ -67,7 +70,7 @@ export async function update(req: Request, res: Response, next: NextFunction) {
     res.json({ data: entry, error: null });
   } catch (err) {
     if (err instanceof z.ZodError) {
-      res.status(400).json({ data: null, error: { code: 'VALIDATION_ERROR', message: err.message } });
+      res.status(400).json({ data: null, error: { code: "VALIDATION_ERROR", message: err.message } });
       return;
     }
     next(err);

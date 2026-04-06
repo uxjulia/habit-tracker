@@ -1,6 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import * as habitsApi from '../api/habits';
-import { queryKeys } from '../api/queryKeys';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import * as habitsApi from "../api/habits";
+import { queryKeys } from "../api/queryKeys";
 
 export function useHabits(includeArchived = false) {
   return useQuery({

@@ -1,5 +1,5 @@
-import { PRESET_COLORS } from '../../utils/colors';
-import { cn } from '../../utils/cn';
+import { PRESET_COLORS } from "../../utils/colors";
+import { cn } from "../../utils/cn";
 
 interface ColorPickerProps {
   value: string;
@@ -17,8 +17,8 @@ export function ColorPicker({ value, onChange }: ColorPickerProps) {
             type="button"
             onClick={() => onChange(color)}
             className={cn(
-              'w-7 h-7 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500',
-              value === color ? 'ring-2 ring-offset-2 ring-zinc-900 dark:ring-zinc-100 scale-110' : 'hover:scale-105'
+              "w-7 h-7 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500",
+              value === color ? "ring-2 ring-offset-2 ring-zinc-900 dark:ring-zinc-100 scale-110" : "hover:scale-105"
             )}
             style={{ backgroundColor: color }}
             aria-label={color}
@@ -36,13 +36,20 @@ export function ColorPicker({ value, onChange }: ColorPickerProps) {
           <label
             htmlFor="custom-color"
             className={cn(
-              'w-7 h-7 rounded-full border-2 border-dashed border-zinc-400 dark:border-zinc-600 flex items-center justify-center cursor-pointer hover:border-zinc-600 dark:hover:border-zinc-400 transition-colors',
-              !PRESET_COLORS.includes(value) && 'border-solid ring-2 ring-offset-2 ring-zinc-900 dark:ring-zinc-100 scale-110'
+              "w-7 h-7 rounded-full border-2 border-dashed border-zinc-400 dark:border-zinc-600 flex items-center justify-center cursor-pointer hover:border-zinc-600 dark:hover:border-zinc-400 transition-colors",
+              !PRESET_COLORS.includes(value) &&
+                "border-solid ring-2 ring-offset-2 ring-zinc-900 dark:ring-zinc-100 scale-110"
             )}
-            style={{ backgroundColor: !PRESET_COLORS.includes(value) ? value : 'transparent' }}
+            style={{ backgroundColor: !PRESET_COLORS.includes(value) ? value : "transparent" }}
           >
             {PRESET_COLORS.includes(value) && (
-              <svg className="w-3 h-3 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <svg
+                className="w-3 h-3 text-zinc-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
             )}

@@ -1,9 +1,9 @@
-import { prisma } from '../lib/prisma';
+import { prisma } from "../lib/prisma";
 
 export async function listHabits(includeArchived = false) {
   return prisma.habit.findMany({
     where: includeArchived ? undefined : { archived: false },
-    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
   });
 }
 
@@ -25,7 +25,5 @@ export async function deleteHabit(id: string) {
 }
 
 export async function reorderHabits(ids: string[]) {
-  await prisma.$transaction(
-    ids.map((id, index) => prisma.habit.update({ where: { id }, data: { sortOrder: index } }))
-  );
+  await prisma.$transaction(ids.map((id, index) => prisma.habit.update({ where: { id }, data: { sortOrder: index } })));
 }

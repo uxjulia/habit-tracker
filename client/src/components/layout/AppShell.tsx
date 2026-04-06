@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
-import { SideNav } from './SideNav';
-import { BottomNav } from './BottomNav';
+import { Outlet } from "react-router-dom";
+import { SideNav } from "./SideNav";
+import { BottomNav } from "./BottomNav";
 
 export function AppShell() {
   return (

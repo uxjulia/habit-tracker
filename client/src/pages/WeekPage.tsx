@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { Button } from '../components/ui/Button';
-import { WeekGrid } from '../components/calendar/WeekGrid';
-import { DayDetailDrawer } from '../components/entries/DayDetailDrawer';
-import { useHabits } from '../hooks/useHabits';
-import { useEntries } from '../hooks/useEntries';
-import { getWeekDays, getWeekStart, getWeekEnd, addWeeks, subWeeks, toISODate, formatWeekRange } from '../utils/dates';
-import type { HabitEntry } from '../types';
+import { useState } from "react";
+import { Button } from "../components/ui/Button";
+import { WeekGrid } from "../components/calendar/WeekGrid";
+import { DayDetailDrawer } from "../components/entries/DayDetailDrawer";
+import { useHabits } from "../hooks/useHabits";
+import { useEntries } from "../hooks/useEntries";
+import { getWeekDays, getWeekStart, getWeekEnd, addWeeks, subWeeks, toISODate, formatWeekRange } from "../utils/dates";
+import type { HabitEntry } from "../types";
 
 export function WeekPage() {
   const [referenceDate, setReferenceDate] = useState(new Date());
@@ -44,17 +44,12 @@ export function WeekPage() {
         </div>
       </div>
 
-      <WeekGrid
-        days={days}
-        habits={habits}
-        entries={entries}
-        onDayClick={handleDayClick}
-      />
+      <WeekGrid days={days} habits={habits} entries={entries} onDayClick={handleDayClick} />
 
       <DayDetailDrawer
         open={!!drawerDate}
         onClose={() => setDrawerDate(null)}
-        date={drawerDate ?? ''}
+        date={drawerDate ?? ""}
         entries={drawerEntries}
         habits={habits}
       />

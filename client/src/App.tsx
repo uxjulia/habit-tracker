@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { AppShell } from './components/layout/AppShell';
-import { LoginPage } from './pages/LoginPage';
-import { SetupPage } from './pages/SetupPage';
-import { TodayPage } from './pages/TodayPage';
-import { WeekPage } from './pages/WeekPage';
-import { MonthPage } from './pages/MonthPage';
-import { HabitsPage } from './pages/HabitsPage';
-import { useAuthStore } from './store/authStore';
-import { useUiStore } from './store/uiStore';
-import { getStatus } from './api/auth';
-import { queryKeys } from './api/queryKeys';
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import { AppShell } from "./components/layout/AppShell";
+import { LoginPage } from "./pages/LoginPage";
+import { SetupPage } from "./pages/SetupPage";
+import { TodayPage } from "./pages/TodayPage";
+import { WeekPage } from "./pages/WeekPage";
+import { MonthPage } from "./pages/MonthPage";
+import { HabitsPage } from "./pages/HabitsPage";
+import { useAuthStore } from "./store/authStore";
+import { useUiStore } from "./store/uiStore";
+import { getStatus } from "./api/auth";
+import { queryKeys } from "./api/queryKeys";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,10 +50,10 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
+    if (theme === "dark") {
+      root.classList.add("dark");
     } else {
-      root.classList.remove('dark');
+      root.classList.remove("dark");
     }
   }, [theme]);
 

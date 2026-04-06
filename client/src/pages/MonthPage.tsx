@@ -1,18 +1,11 @@
-import { useState } from 'react';
-import { Button } from '../components/ui/Button';
-import { MonthGrid } from '../components/calendar/MonthGrid';
-import { DayDetailDrawer } from '../components/entries/DayDetailDrawer';
-import { useHabits } from '../hooks/useHabits';
-import { useEntries } from '../hooks/useEntries';
-import {
-  addMonths,
-  subMonths,
-  toISODate,
-  formatMonthYear,
-  startOfMonth,
-  endOfMonth,
-} from '../utils/dates';
-import type { HabitEntry } from '../types';
+import { useState } from "react";
+import { Button } from "../components/ui/Button";
+import { MonthGrid } from "../components/calendar/MonthGrid";
+import { DayDetailDrawer } from "../components/entries/DayDetailDrawer";
+import { useHabits } from "../hooks/useHabits";
+import { useEntries } from "../hooks/useEntries";
+import { addMonths, subMonths, toISODate, formatMonthYear, startOfMonth, endOfMonth } from "../utils/dates";
+import type { HabitEntry } from "../types";
 
 export function MonthPage() {
   const [referenceDate, setReferenceDate] = useState(new Date());
@@ -24,9 +17,7 @@ export function MonthPage() {
   const { data: habits = [] } = useHabits();
   const { data: entries = [] } = useEntries(startDate, endDate);
 
-  const drawerEntries: HabitEntry[] = drawerDate
-    ? entries.filter((e) => e.date === drawerDate)
-    : [];
+  const drawerEntries: HabitEntry[] = drawerDate ? entries.filter((e) => e.date === drawerDate) : [];
 
   return (
     <div>
@@ -46,11 +37,7 @@ export function MonthPage() {
         </div>
       </div>
 
-      <MonthGrid
-        month={referenceDate}
-        entries={entries}
-        onDayClick={(date) => setDrawerDate(date)}
-      />
+      <MonthGrid month={referenceDate} entries={entries} onDayClick={(date) => setDrawerDate(date)} />
 
       {/* Color legend */}
       {habits.length > 0 && (
@@ -69,7 +56,7 @@ export function MonthPage() {
       <DayDetailDrawer
         open={!!drawerDate}
         onClose={() => setDrawerDate(null)}
-        date={drawerDate ?? ''}
+        date={drawerDate ?? ""}
         entries={drawerEntries}
         habits={habits}
       />

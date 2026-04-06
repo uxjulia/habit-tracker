@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   DndContext,
   closestCenter,
@@ -7,21 +7,26 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   SortableContext,
   sortableKeyboardCoordinates,
   useSortable,
   verticalListSortingStrategy,
   arrayMove,
-} from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { Button } from '../components/ui/Button';
-import { HabitForm } from '../components/habits/HabitForm';
-import { useHabits, useUpdateHabit, useDeleteHabit, useReorderHabits } from '../hooks/useHabits';
-import type { Habit } from '../types';
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { Button } from "../components/ui/Button";
+import { HabitForm } from "../components/habits/HabitForm";
+import { useHabits, useUpdateHabit, useDeleteHabit, useReorderHabits } from "../hooks/useHabits";
+import type { Habit } from "../types";
 
-function SortableHabitRow({ habit, onEdit, onArchive, onDelete }: {
+function SortableHabitRow({
+  habit,
+  onEdit,
+  onArchive,
+  onDelete,
+}: {
   habit: Habit;
   onEdit: (h: Habit) => void;
   onArchive: (h: Habit) => void;
@@ -121,7 +126,10 @@ export function HabitsPage() {
         <h1 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Habits</h1>
         <Button
           size="sm"
-          onClick={() => { setEditingHabit(undefined); setFormOpen(true); }}
+          onClick={() => {
+            setEditingHabit(undefined);
+            setFormOpen(true);
+          }}
         >
           + New Habit
         </Button>
@@ -141,7 +149,10 @@ export function HabitsPage() {
                 <SortableHabitRow
                   key={habit.id}
                   habit={habit}
-                  onEdit={(h) => { setEditingHabit(h); setFormOpen(true); }}
+                  onEdit={(h) => {
+                    setEditingHabit(h);
+                    setFormOpen(true);
+                  }}
                   onArchive={handleArchive}
                   onDelete={handleDelete}
                 />
@@ -161,14 +172,22 @@ export function HabitsPage() {
                 key={habit.id}
                 className="flex items-center gap-3 bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 px-4 py-3 opacity-60"
               >
-                <span className="w-2.5 h-2.5 rounded-full flex-shrink-0 opacity-50" style={{ backgroundColor: habit.color }} />
+                <span
+                  className="w-2.5 h-2.5 rounded-full flex-shrink-0 opacity-50"
+                  style={{ backgroundColor: habit.color }}
+                />
                 <span className="flex-1 text-sm text-zinc-600 dark:text-zinc-400 truncate line-through">
                   {habit.name}
                 </span>
                 <Button variant="ghost" size="sm" onClick={() => handleRestore(habit)}>
                   Restore
                 </Button>
-                <Button variant="ghost" size="sm" onClick={() => handleDelete(habit)} className="text-red-400 hover:text-red-600">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handleDelete(habit)}
+                  className="text-red-400 hover:text-red-600"
+                >
                   Delete
                 </Button>
               </div>
@@ -179,7 +198,10 @@ export function HabitsPage() {
 
       <HabitForm
         open={formOpen}
-        onClose={() => { setFormOpen(false); setEditingHabit(undefined); }}
+        onClose={() => {
+          setFormOpen(false);
+          setEditingHabit(undefined);
+        }}
         habit={editingHabit}
       />
     </div>

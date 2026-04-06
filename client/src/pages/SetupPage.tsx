@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { Input } from '../components/ui/Input';
-import { Button } from '../components/ui/Button';
-import { useAuthStore } from '../store/authStore';
-import { setup } from '../api/auth';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Input } from "../components/ui/Input";
+import { Button } from "../components/ui/Button";
+import { useAuthStore } from "../store/authStore";
+import { setup } from "../api/auth";
 
 interface FormData {
   username: string;
@@ -15,7 +15,7 @@ interface FormData {
 export function SetupPage() {
   const navigate = useNavigate();
   const authLogin = useAuthStore((s) => s.login);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const {
     register,
@@ -24,16 +24,16 @@ export function SetupPage() {
     formState: { isSubmitting, errors },
   } = useForm<FormData>();
 
-  const password = watch('password');
+  const password = watch("password");
 
   const onSubmit = async (data: FormData) => {
-    setError('');
+    setError("");
     try {
       const result = await setup(data.username, data.password);
       authLogin(result.token, result.username);
-      navigate('/');
+      navigate("/");
     } catch {
-      setError('Setup failed. The account may already exist.');
+      setError("Setup failed. The account may already exist.");
     }
   };
 
@@ -52,9 +52,9 @@ export function SetupPage() {
               placeholder="Choose a username"
               autoComplete="username"
               error={errors.username?.message}
-              {...register('username', {
-                required: 'Username is required',
-                minLength: { value: 2, message: 'At least 2 characters' },
+              {...register("username", {
+                required: "Username is required",
+                minLength: { value: 2, message: "At least 2 characters" },
               })}
             />
             <Input
@@ -63,9 +63,9 @@ export function SetupPage() {
               placeholder="At least 8 characters"
               autoComplete="new-password"
               error={errors.password?.message}
-              {...register('password', {
-                required: 'Password is required',
-                minLength: { value: 8, message: 'At least 8 characters' },
+              {...register("password", {
+                required: "Password is required",
+                minLength: { value: 8, message: "At least 8 characters" },
               })}
             />
             <Input
@@ -74,13 +74,13 @@ export function SetupPage() {
               placeholder="Repeat your password"
               autoComplete="new-password"
               error={errors.confirmPassword?.message ?? (error || undefined)}
-              {...register('confirmPassword', {
-                required: 'Please confirm your password',
-                validate: (v) => v === password || 'Passwords do not match',
+              {...register("confirmPassword", {
+                required: "Please confirm your password",
+                validate: (v) => v === password || "Passwords do not match",
               })}
             />
             <Button type="submit" className="mt-2" disabled={isSubmitting}>
-              {isSubmitting ? 'Creating account...' : 'Create Account'}
+              {isSubmitting ? "Creating account..." : "Create Account"}
             </Button>
           </form>
         </div>

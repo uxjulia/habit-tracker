@@ -1,6 +1,6 @@
-import { cn } from '../../utils/cn';
-import { isToday, isSameMonth, formatDayNumber, fromISODate, toISODate } from '../../utils/dates';
-import type { HabitEntry } from '../../types';
+import { cn } from "../../utils/cn";
+import { isToday, isSameMonth, formatDayNumber, fromISODate, toISODate } from "../../utils/dates";
+import type { HabitEntry } from "../../types";
 
 const MAX_DOTS = 6;
 
@@ -31,19 +31,17 @@ export function DayCell({ date, currentMonth, entries, onClick }: DayCellProps) 
     <button
       onClick={() => onClick(dateStr)}
       className={cn(
-        'relative flex flex-col p-1.5 sm:p-2 rounded-xl text-left transition-colors min-h-[52px] sm:min-h-[64px]',
-        sameMonth
-          ? 'hover:bg-zinc-100 dark:hover:bg-zinc-800'
-          : 'opacity-30 pointer-events-none',
-        today && 'bg-zinc-100 dark:bg-zinc-800'
+        "relative flex flex-col p-1.5 sm:p-2 rounded-xl text-left transition-colors min-h-[52px] sm:min-h-[64px]",
+        sameMonth ? "hover:bg-zinc-100 dark:hover:bg-zinc-800" : "opacity-30 pointer-events-none",
+        today && "bg-zinc-100 dark:bg-zinc-800"
       )}
     >
       <span
         className={cn(
-          'text-xs sm:text-sm font-medium leading-none mb-1.5 self-end',
+          "text-xs sm:text-sm font-medium leading-none mb-1.5 self-end",
           today
-            ? 'w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center text-xs'
-            : 'text-zinc-700 dark:text-zinc-300'
+            ? "w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center text-xs"
+            : "text-zinc-700 dark:text-zinc-300"
         )}
       >
         {formatDayNumber(date)}
@@ -58,9 +56,7 @@ export function DayCell({ date, currentMonth, entries, onClick }: DayCellProps) 
             title={entry.habit.name}
           />
         ))}
-        {overflow > 0 && (
-          <span className="text-[9px] text-zinc-400 leading-none self-end">+{overflow}</span>
-        )}
+        {overflow > 0 && <span className="text-[9px] text-zinc-400 leading-none self-end">+{overflow}</span>}
       </div>
     </button>
   );

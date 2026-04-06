@@ -1,11 +1,11 @@
-import bcrypt from 'bcryptjs';
-import { env } from './config/env';
-import { prisma } from './lib/prisma';
-import { createApp } from './app';
+import bcrypt from "bcryptjs";
+import { env } from "./config/env";
+import { prisma } from "./lib/prisma";
+import { createApp } from "./app";
 
 async function main() {
   await prisma.$connect();
-  console.log('Database connected');
+  console.log("Database connected");
 
   // Auto-seed from env vars if provided (idempotent)
   if (env.SETUP_USERNAME && env.SETUP_PASSWORD) {
@@ -25,6 +25,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('Fatal error:', err);
+  console.error("Fatal error:", err);
   process.exit(1);
 });

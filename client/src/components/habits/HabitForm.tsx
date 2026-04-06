@@ -78,15 +78,8 @@ export function HabitForm({ open, onClose, habit }: HabitFormProps) {
   };
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      title={isEdit ? "Edit Habit" : "New Habit"}
-    >
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="p-5 flex flex-col gap-4"
-      >
+    <Modal open={open} onClose={onClose} title={isEdit ? "Edit Habit" : "New Habit"}>
+      <form onSubmit={handleSubmit(onSubmit)} className="p-5 flex flex-col gap-4">
         <Input
           label="Name"
           placeholder="e.g. Morning Run"
@@ -108,12 +101,7 @@ export function HabitForm({ open, onClose, habit }: HabitFormProps) {
         <ColorPicker value={color} onChange={(c) => setValue("color", c)} />
 
         <div className="flex gap-2 pt-2">
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={onClose}
-            className="flex-1"
-          >
+          <Button type="button" variant="secondary" onClick={onClose} className="flex-1">
             Cancel
           </Button>
           <Button type="submit" className="flex-1" disabled={isSubmitting}>
