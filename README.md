@@ -1,3 +1,5 @@
+> AI Disclosure: This app was heavily vibe coded with Claude Code over a weekend to fulfill something I've wanted to build but have been too lazy to actually do.
+
 # Habit Tracker
 
 A self-hosted habit tracking web app. Track anything — meals, workouts, laundry — with weekly and monthly calendar views, color-coded habits, and optional time + notes for each log entry.
