@@ -98,7 +98,7 @@ export function TodayPage() {
             return (
               <div
                 key={habit.id}
-                className="bg-white dark:bg-zinc-900 rounded-md border border-zinc-200 dark:border-zinc-800 overflow-hidden"
+                className="bg-white dark:bg-zinc-900 rounded-sm border border-zinc-200 dark:border-zinc-800 overflow-hidden"
               >
                 {/* Habit row */}
                 <div className="flex items-center gap-3 px-4 py-3">
