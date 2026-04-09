@@ -1,4 +1,4 @@
-> AI Disclosure: This app was heavily vibe coded with Claude Code.
+> AI Disclosure: This app was heavily vibe coded with Claude Code over a weekend to fulfill something I've wanted to build but have been too lazy to actually do.
 
 # Habit Tracker
 
