@@ -44,7 +44,7 @@ function SortableHabitRow({
     <div
       ref={setNodeRef}
       style={style}
-      className="flex items-center gap-3 bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 px-4 py-3"
+      className="flex items-center gap-3 bg-white dark:bg-zinc-900 rounded-md border border-zinc-200 dark:border-zinc-800 px-4 py-3"
     >
       {/* Drag handle */}
       <button
@@ -170,7 +170,7 @@ export function HabitsPage() {
             {archivedHabits.map((habit) => (
               <div
                 key={habit.id}
-                className="flex items-center gap-3 bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 px-4 py-3 opacity-60"
+                className="flex items-center gap-3 bg-white dark:bg-zinc-900 rounded-md border border-zinc-200 dark:border-zinc-800 px-4 py-3 opacity-60"
               >
                 <span
                   className="w-2.5 h-2.5 rounded-full flex-shrink-0 opacity-50"

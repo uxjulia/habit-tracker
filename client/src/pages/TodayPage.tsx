@@ -47,7 +47,7 @@ export function TodayPage() {
         <div className="flex items-center gap-2">
           <button
             onClick={goToPreviousDay}
-            className="flex items-center justify-center w-8 h-8 rounded-lg text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            className="flex items-center justify-center w-8 h-8 rounded-md text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             aria-label="Previous day"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -63,7 +63,7 @@ export function TodayPage() {
           <button
             onClick={goToNextDay}
             disabled={isCurrentDay}
-            className="flex items-center justify-center w-8 h-8 rounded-lg text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-zinc-400"
+            className="flex items-center justify-center w-8 h-8 rounded-md text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-zinc-400"
             aria-label="Next day"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -74,7 +74,7 @@ export function TodayPage() {
         {!isCurrentDay && (
           <button
             onClick={() => setCurrentDate(new Date())}
-            className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700 rounded-lg px-2.5 py-1 transition-colors"
+            className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700 rounded-sm px-2.5 py-1 transition-colors"
           >
             Today
           </button>
@@ -98,7 +98,7 @@ export function TodayPage() {
             return (
               <div
                 key={habit.id}
-                className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden"
+                className="bg-white dark:bg-zinc-900 rounded-md border border-zinc-200 dark:border-zinc-800 overflow-hidden"
               >
                 {/* Habit row */}
                 <div className="flex items-center gap-3 px-4 py-3">
